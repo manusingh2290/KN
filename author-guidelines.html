@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Guidelines - Kumple News</title>
+    <link rel="icon" href="Kumple News.png" type="image/x-icon">
+    <!-- Tailwind CSS CDN for quick setup. If you're building Tailwind locally, link to your generated CSS file instead. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS for font consistency and other styles, matching your index.html -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap');
+        
+        body {
+            /* Applying Open Sans as the primary body font */
+            font-family: 'Open Sans', sans-serif;
+            /* Setting a consistent text color from your provided CSS */
+            color: #333; 
+            /* Setting line height for better readability */
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            /* Applying Merriweather for all headings */
+            font-family: 'Merriweather', serif;
+        }
+        
+        /* Utility class for visually hiding content (for SEO/accessibility) */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* Custom styling for nested bullet points to differentiate them if needed.
+           Tailwind's 'list-disc' is used for primary lists.
+           For nested lists, consider if 'list-none' with 'pl-6' and a custom bullet is preferred,
+           or if standard 'list-disc' for all levels is sufficient.
+           Here, I've adjusted 'list-circle' to 'list-disc' as 'list-circle' is not a default Tailwind class.
+           If you want a different bullet style for nested lists, you'd add custom CSS for it.
+        */
+        .list-circle {
+            list-style-type: circle; /* Example if you want distinct nested bullets */
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-gray-100 text-gray-900">
+
+    <!-- Header Section (Copy this from your main site for consistency) -->
+    <header class="bg-white shadow py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center rounded-md">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="Kumple News.png" alt="Kumple News Logo" class="h-8 w-8 object-contain text-indigo-600">
+                <span class="text-2xl font-bold text-indigo-700">Kumple News</span>
+            </a>
+            <nav>
+                <a href="about.html" class="text-gray-600 hover:text-indigo-700 mx-2">About</a>
+                <a href="author-guidelines.html" class="text-indigo-700 font-semibold mx-2">Contribute</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto px-4 py-12 max-w-4xl bg-white shadow-lg rounded-lg my-8">
+        <h1 class="text-4xl font-extrabold text-center text-indigo-800 mb-8">Kumple News Author Guidelines: Contributing to Clarity</h1>
+
+        <section class="mb-10">
+            <p class="text-lg text-gray-700 leading-relaxed mb-6">At Kumple News, our mission is to empower our readers with clear, concise, and insightful understanding of the world. We value well-researched, balanced perspectives that cut through the noise and foster informed discussion. If you share this vision and have a unique insight to contribute, we welcome your submissions!</p>
+            <p class="text-lg text-gray-700 leading-relaxed">Please review these guidelines carefully before submitting your pitch or draft.</p>
+        </section>
+
+        <hr class="my-8 border-gray-300">
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">1. Our Content Focus & Mission</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li><strong>Clarity & Insight:</strong> Our primary goal is to make complex topics understandable. Submissions should aim to clarify, explain, and provide actionable insights, rather than just report facts.</li>
+                <li><strong>Relevance:</strong> We cover current events, social issues, technology, lifestyle, and personal growth – always through the lens of providing clarity and deeper understanding.</li>
+                <li><strong>Beyond the Headline:</strong> We seek pieces that explain the "why" and "how," offering context and implications that readers won't find in a quick news scroll.</li>
+                <li><strong>Balance & Objectivity (where applicable):</strong> For analytical or explanatory pieces, strive for balanced perspectives and present information fairly. Our aim is to inform, not to persuade with bias.</li>
+                <li><strong>Originality:</strong> We prefer original thought, unique angles, and fresh perspectives on established topics.</li>
+            </ul>
+        </section>
+
+        <hr class="my-8 border-gray-300">
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">2. Tone & Style</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li><strong>Accessible & Engaging:</strong> Write for a broad audience. Avoid jargon where possible, and if technical terms are necessary, explain them clearly. Your writing should be engaging, conversational, and easy to follow.</li>
+                <li><strong>Concise & Direct:</strong> Every word should earn its place. Get straight to the point and avoid unnecessary fluff. Remember our promise to cut through the clutter.</li>
+                <li><strong>Authoritative yet Approachable:</strong> Demonstrate expertise without being condescending. Be confident in your knowledge, but maintain a tone that invites readers in.</li>
+                <li><strong>Kumple News Voice:</strong> While we value individual voices, aim for a consistent standard of professionalism and clarity that aligns with the Kumple News brand.</li>
+            </ul>
+        </section>
+
+        <hr class="my-8 border-gray-300">
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">3. Submission Requirements</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li><strong>Pitch First (Preferred):</strong> For original ideas, we prefer a brief (200-300 word) pitch outlining:
+                    <ul class="list-disc pl-6 mt-1 space-y-1"> <!-- Changed list-circle to list-disc -->
+                        <li>Your proposed topic and its relevance to current events or reader interest.</li>
+                        <li>The core argument or main takeaway your article will provide.</li>
+                        <li>Why *you* are the right person to write this piece (your expertise/background).</li>
+                        <li>A brief outline of the article's structure.</li>
+                    </ul>
+                </li>
+                <li><strong>Article Length:</strong>
+                    <ul class="list-disc pl-6 mt-1 space-y-1"> <!-- Changed list-circle to list-disc -->
+                        <li><strong>Explained News/Short Insights:</strong> 500-800 words</li>
+                        <li><strong>Deep Dives/Analytical Pieces:</strong> 800-1500 words</li>
+                        <li><em>Note: Quality over quantity. We prioritize impactful content over word count.</em></li>
+                    </ul>
+                </li>
+                <li><strong>File Format:</strong> Submit drafts in Google Docs (shared with commenting access) or a clean Word document (.doc/.docx).</li>
+                <li><strong>Headlines:</strong> Propose a compelling, clear, and engaging headline that accurately reflects your article's content. We may adjust headlines for SEO and consistency.</li>
+            </ul>
+        </section>
+
+        <hr class="my-8 border-gray-300">
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">4. Accuracy, Sourcing & Originality</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li><strong>Fact-Checking:</strong> All factual claims MUST be accurate and verifiable. Double-check names, dates, statistics, and any other data.</li>
+                <li><strong>Credible Sources:</strong> Cite your sources! For statistics, quotes, or significant claims, provide links to reputable sources (academic papers, reputable news organizations, official reports, etc.). Avoid Wikipedia or unverified blogs as primary sources.</li>
+                <li><strong>Original Work:</strong> All submissions must be your original work and not previously published elsewhere, including your personal blog (unless agreed upon beforehand for very specific circumstances).</li>
+                <li><strong>Plagiarism:</strong> Plagiarism in any form will result in immediate rejection and no future consideration.</li>
+            </ul>
+        </section>
+
+        <hr class="my-8 border-gray-300">
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">5. Formatting & Structure</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li><strong>Clear Introduction:</strong> Hook the reader and state the article's purpose or main argument early on.</li>
+                <li><strong>Logical Flow:</strong> Organize your thoughts with clear headings and subheadings. Each section should transition smoothly to the next.</li>
+                <li><strong>Short Paragraphs:</strong> Break up large blocks of text. Aim for paragraphs of 3-5 sentences for readability on screens.</li>
+                <li><strong>Bullet Points & Numbered Lists:</strong> Use these to break down complex information and enhance readability.</li>
+                <li><strong>Call to Action/Conclusion:</strong> End with a strong conclusion that summarizes key takeaways or encourages further thought/discussion.</li>
+            </ul>
+        </section>
+
+        <hr class="my-8 border-gray-300">
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">6. Author Bio & Promotion</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li><strong>Short Bio:</strong> Include a brief (2-3 sentences) author bio at the end of your submission. This can include your relevant expertise, passion, or current role.</li>
+                <li><strong>Professional Photo:</strong> Provide a clear, professional headshot for your author profile.</li>
+                <li><strong>Social Media Links:</strong> Include links to 1-2 professional social media profiles (e.g., LinkedIn, Twitter) you'd like to share.</li>
+                <li><strong>Sharing:</strong> We encourage authors to share their published articles across their networks once live.</li>
+            </ul>
+        </section>
+
+        <hr class="my-8 border-gray-300">
+
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">7. Editorial Process</h2>
+            <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                <li><strong>Review:</strong> All submissions will be reviewed by the Kumple News editorial team.</li>
+                <li><strong>Feedback & Edits:</strong> We reserve the right to edit submissions for clarity, conciseness, grammar, style, SEO, and adherence to our editorial guidelines. We may also suggest revisions to content or structure.</li>
+                <li><strong>Communication:</strong> We will communicate with you throughout the process regarding acceptance, feedback, and publication schedule.</li>
+                <li><strong>Timelines:</strong> Due to the volume of submissions, response times may vary. We appreciate your patience.</li>
+            </ul>
+        </section>
+
+        <section class="text-center mt-12">
+            <p class="text-xl font-semibold text-gray-800 mb-4">Ready to contribute? Send your pitch or draft to <a href="mailto:contribute@kumplenews.com" class="text-indigo-600 hover:text-indigo-800 underline">contribute@kumplenews.com</a> with the subject line "Author Submission: [Your Proposed Article Title]".</p>
+            <p class="text-lg text-gray-700">We look forward to collaborating with you to bring clarity to our readers!</p>
+        </section>
+    </main>
+
+    <!-- Footer Section (Copy this from your main site for consistency) -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container mx-auto px-4 text-center rounded-md">
+            <p>&copy; 2025 Kumple News. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

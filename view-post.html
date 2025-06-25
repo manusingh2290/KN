@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Post</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <header class="bg-indigo-700 text-white py-5 text-center text-2xl font-bold">📖 Full Blog Post</header>
+
+  <main class="max-w-4xl mx-auto p-6" id="post-content">
+    <p class="text-gray-500">Loading...</p>
+  </main>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBLJkKhR2JC2OVg5ZqLU6o4-MfN_0dSI-I",
+      authDomain: "kumple-blog.firebaseapp.com",
+      projectId: "kumple-blog",
+      storageBucket: "kumple-blog.firebasestorage.app",
+      messagingSenderId: "721982233945",
+      appId: "1:721982233945:web:0d4f5abcc08ea7959f0048",
+      measurementId: "G-KPJRL64WB2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const postContainer = document.getElementById("post-content");
+    const queryParams = new URLSearchParams(window.location.search);
+    const postId = queryParams.get("id");
+
+    if (!postId) {
+      postContainer.innerHTML = "<p class='text-red-500'>❌ No blog post ID found in URL.</p>";
+    } else {
+      db.collection("blogs").doc(postId).get().then(doc => {
+        if (!doc.exists) {
+          postContainer.innerHTML = "<p class='text-red-500'>❌ Blog post not found.</p>";
+          return;
+        }
+
+        const blog = doc.data();
+        postContainer.innerHTML = `
+          <h1 class="text-3xl font-bold mb-2">${blog.title}</h1>
+          <p class="text-sm text-gray-500 mb-4">By ${blog.author || "Unknown"} • ${new Date(blog.date).toLocaleDateString()}</p>
+          <img src="${blog.imageUrl || 'https://via.placeholder.com/800x400'}" class="w-full h-auto rounded-lg mb-6" />
+          <div class="text-gray-800 leading-relaxed text-lg mb-6">${blog.content.replace(/\n/g, '<br>')}</div>
+
+          <div class="mb-2">
+            <h3 class="font-semibold text-gray-700 mb-1">Categories:</h3>
+            ${(blog.categories || []).map(cat => `<span class="bg-indigo-100 text-indigo-700 text-sm px-2 py-1 rounded-full mr-2">${cat}</span>`).join('')}
+          </div>
+
+          <div>
+            <h3 class="font-semibold text-gray-700 mb-1">Tags:</h3>
+            ${(blog.tags || []).map(tag => `<span class="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded-full mr-2">${tag}</span>`).join('')}
+          </div>
+        `;
+      }).catch(err => {
+        console.error(err);
+        postContainer.innerHTML = "<p class='text-red-500'>⚠️ Failed to load post.</p>";
+      });
+    }
+  </script>
+</body>
+</html>
