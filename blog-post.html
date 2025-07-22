@@ -1,298 +1,263 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
-    <link rel="icon" href="Kumple News.png" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-        }
-        .blog-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            margin: 1.5rem 0;
-        }
-        .blog-content a {
-            color: #3b82f6;
-            text-decoration: underline;
-        }
-        .category-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .category-dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0.5rem;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .category-dropdown:hover .category-dropdown-content {
-            display: block;
-        }
-        .category-item {
-            padding: 12px 16px;
-            cursor: pointer;
-        }
-        .category-item:hover {
-            background-color: #f1f5f9;
-        }
-        .category-badge {
-            display: inline-block;
-            background-color: #e0f2fe;
-            color: #0369a1;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            margin: 0.25rem;
-            font-size: 0.875rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kumple Blog</title>
+  <link rel="icon" href="Kumple News.png" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .category-badge {
+      display: inline-block;
+      background-color: #e0f2fe;
+      color: #0369a1;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      margin: 0.25rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .category-badge.selected {
+      background-color: #bfdbfe;
+      color: #1e3a8a;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold">My Blog</h1>
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="#" class="hover:text-blue-200 transition">Home</a></li>
-                        <li><a href="#" class="hover:text-blue-200 transition">Archive</a></li>
-                        <li><a href="#" class="hover:text-blue-200 transition">About</a></li>
-                    </ul>
-                </nav>
-            </div>
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg">
+    <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+      <h1 class="text-3xl font-bold">Kumple Blog</h1>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="#" class="hover:text-blue-200 transition">Home</a></li>
+          <li><a href="#" class="hover:text-blue-200 transition">Archive</a></li>
+          <li><a href="#" class="hover:text-blue-200 transition">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Left Section -->
+      <div class="w-full md:w-2/3">
+
+        <!-- Auth Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 class="text-2xl font-bold mb-4">Login or Sign Up</h2>
+          <input type="email" id="auth-email" placeholder="Email" class="w-full mb-3 px-4 py-2 border rounded-lg">
+          <input type="password" id="auth-password" placeholder="Password" class="w-full mb-3 px-4 py-2 border rounded-lg">
+          <div class="flex gap-4">
+            <button id="login-btn" class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+            <button id="signup-btn" class="bg-green-500 text-white px-4 py-2 rounded">Sign Up</button>
+            <button id="logout-btn" class="bg-gray-600 text-white px-4 py-2 rounded hidden">Logout</button>
+          </div>
+          <p id="auth-status" class="mt-2 text-sm text-gray-500"></p>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-        <div class="flex flex-col md:flex-row gap-8">
-            <!-- Blog Posts Section -->
-            <div class="w-full md:w-2/3">
-                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                    <h2 class="text-2xl font-bold mb-4">Create New Post</h2>
-                    <form id="blog-form">
-                        <div class="mb-4">
-                            <label for="title" class="block text-gray-700 font-medium mb-2">Title</label>
-                            <input type="text" id="title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter post title">
-                        </div>
-                        <div class="mb-4">
-                            <label for="content" class="block text-gray-700 font-medium mb-2">Content</label>
-                            <textarea id="content" rows="8" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your blog post here..."></textarea>
-                        </div>
-                        <div class="mb-4">
-                            <label for="image" class="block text-gray-700 font-medium mb-2">Featured Image URL (optional)</label>
-                            <input type="text" id="image" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com/image.jpg">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-medium mb-2">Categories</label>
-                            <div class="flex flex-wrap gap-2 mb-2" id="selected-categories">
-                                <!-- Selected categories will appear here -->
-                            </div>
-                            <div class="relative">
-                                <input type="text" id="category-search" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search or select categories...">
-                                <div id="category-dropdown" class="hidden absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-60 overflow-y-auto shadow-lg">
-                                    <!-- Categories will be populated here -->
-                                </div>
-                            </div>
-                            <input type="hidden" id="categories" value="">
-                        </div>
-                        <div class="mb-4">
-                            <label for="tags" class="block text-gray-700 font-medium mb-2">Tags (comma separated)</label>
-                            <input type="text" id="tags" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="technology, travel, food">
-                        </div>
-                        <div class="mb-4">
-    <label for="author" class="block text-gray-700 font-medium mb-2">Author Name</label>
-    <input type="text" id="author" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter author's name">
-</div>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">Publish Post</button>
-                    </form>
-                </div>
-
-                <h2 class="text-2xl font-bold mb-6">Published Posts</h2>
-                <div id="posts-container">
-                    <!-- Sample post that will be replaced by actual posts -->
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">Welcome to My Blog</h3>
-                            <div class="flex items-center text-gray-500 text-sm mb-4">
-                                <span>Posted on May 15, 2023</span>
-                                <span class="mx-2">•</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">welcome</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full ml-1">intro</span>
-                            </div>
-                            <div class="flex flex-wrap mb-4">
-                                <span class="category-badge">राजस्थान</span>
-                                <span class="category-badge">भारत</span>
-                            </div>
-                            <p class="text-gray-600 mb-4">This is my first blog post! I'm excited to share my thoughts and ideas with you all.</p>
-                            <div class="flex justify-between items-center">
-                                <button class="text-blue-600 hover:text-blue-800 font-medium">Read More</button>
-                                <div>
-                                    <button class="text-gray-500 hover:text-gray-700 mr-2" data-action="edit">Edit</button>
-                                    <button class="text-red-500 hover:text-red-700" data-action="delete">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Blog Form -->
+        <div id="blog-interface" class="hidden bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 class="text-2xl font-bold mb-4">Create New Post</h2>
+          <form id="blog-form">
+            <input type="text" id="title" placeholder="Post Title" class="w-full mb-4 px-4 py-2 border rounded-lg" />
+            <textarea id="content" rows="6" placeholder="Write your blog..." class="w-full mb-4 px-4 py-2 border rounded-lg"></textarea>
+            <input type="text" id="image" placeholder="Image URL (optional)" class="w-full mb-4 px-4 py-2 border rounded-lg">
+            <input type="file" id="image-file" accept="image/*" class="w-full mb-4" />
+            <input type="text" id="youtube" placeholder="YouTube Video Link (optional)" class="w-full mb-4 px-4 py-2 border rounded-lg">
+            <input type="text" id="tags" placeholder="Tags (comma separated)" class="w-full mb-4 px-4 py-2 border rounded-lg">
+            <input type="text" id="author" placeholder="Author Name" class="w-full mb-4 px-4 py-2 border rounded-lg">
+            <div class="mb-4">
+              <label class="block text-gray-700 font-medium mb-2">Selected Categories</label>
+              <div id="selected-categories" class="flex flex-wrap gap-2"></div>
+              <input type="hidden" id="categories" value="">
             </div>
-
-            <!-- Sidebar -->
-            <div class="w-full md:w-1/3">
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-xl font-bold mb-4">About</h3>
-                    <p class="text-gray-600">Welcome to my blog! Here I share my thoughts, experiences, and insights on various topics.</p>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-xl font-bold mb-4">Categories</h3>
-                    <div class="flex flex-wrap gap-2" id="categories-container">
-                        <span class="category-badge cursor-pointer">राजस्थान</span>
-                        <span class="category-badge cursor-pointer">क्राइम</span>
-                        <span class="category-badge cursor-pointer">वीडियो</span>
-                        <span class="category-badge cursor-pointer">भारत</span>
-                        <span class="category-badge cursor-pointer">बॉलीवुड</span>
-                        <span class="category-badge cursor-pointer">राजनीति</span>
-                        <span class="category-badge cursor-pointer">खेल</span>
-                        <span class="category-badge cursor-pointer">लाइफस्टाइल</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-xl font-bold mb-4">Popular Tags</h3>
-                    <div class="flex flex-wrap gap-2" id="tags-container">
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm cursor-pointer">welcome</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm cursor-pointer">intro</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold mb-4">Search</h3>
-                    <div class="relative">
-                        <input type="text" id="search" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search posts...">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Publish</button>
+          </form>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <h2 class="text-2xl font-bold">Kumple News</h2>
-                    <p class="text-gray-400">Share your thoughts with the world</p>
-                </div>
-                <div>
-                    <p class="text-gray-400">&copy; 2025 Kumple. All rights reserved.</p>
-                </div>
-            </div>
+        <!-- Placeholder for future posts rendering -->
+        <div id="posts-container"></div>
+      </div>
+
+      <!-- Right Sidebar -->
+      <div class="w-full md:w-1/3">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-bold mb-4">Categories</h3>
+          <div id="categories-container" class="flex flex-wrap gap-2">
+            <span class="category-badge">राजस्थान</span>
+            <span class="category-badge">क्राइम</span>
+            <span class="category-badge">वीडियो</span>
+            <span class="category-badge">भारत</span>
+            <span class="category-badge">बॉलीवुड</span>
+            <span class="category-badge">राजनीति</span>
+            <span class="category-badge">खेल</span>
+            <span class="category-badge">लाइफस्टाइल</span>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </main>
 
+  <footer class="bg-gray-800 text-white py-6 text-center">
+    <h2 class="text-xl font-bold">Kumple News</h2>
+    <p class="text-gray-400">&copy; 2025 Kumple. All rights reserved.</p>
+  </footer>
 
-    <!-- ✅ Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBLJkKhR2JC2OVg5ZqLU6o4-MfN_0dSI-I",
-    authDomain: "kumple-blog.firebaseapp.com",
-    projectId: "kumple-blog",
-    storageBucket: "kumple-blog.firebasestorage.app",
-    messagingSenderId: "721982233945",
-    appId: "1:721982233945:web:0d4f5abcc08ea7959f0048",
-    measurementId: "G-KPJRL64WB2"
-  };
+  <script src="gitignore.js"></script>
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+  <script>
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+    const storage = firebase.storage();
+  </script>
 
-  document.getElementById('blog-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
+  <script>
+    const loginBtn = document.getElementById("login-btn");
+    const signupBtn = document.getElementById("signup-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const authStatus = document.getElementById("auth-status");
+    const blogInterface = document.getElementById("blog-interface");
 
-    const title = document.getElementById('title').value.trim();
-    const author = document.getElementById('author').value.trim();
-    const content = document.getElementById('content').value.trim();
-    const imageUrl = document.getElementById('image').value.trim();
-    const tags = document.getElementById('tags').value.split(',').map(tag => tag.trim()).filter(tag => tag !== '');
-    const categories = document.getElementById('categories').value.split(',').map(cat => cat.trim()).filter(cat => cat !== '');
+    loginBtn.onclick = () => {
+      const email = document.getElementById("auth-email").value;
+      const password = document.getElementById("auth-password").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => authStatus.textContent = "✅ Logged in")
+        .catch(err => authStatus.textContent = "❌ " + err.message);
+    };
 
-    if (!title || !content || !author) {
-      alert('Please fill in title, content, and author name.');
-      return;
+    signupBtn.onclick = () => {
+      const email = document.getElementById("auth-email").value;
+      const password = document.getElementById("auth-password").value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => authStatus.textContent = "✅ Signed up")
+        .catch(err => authStatus.textContent = "❌ " + err.message);
+    };
+
+    logoutBtn.onclick = () => auth.signOut();
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        blogInterface.classList.remove("hidden");
+        logoutBtn.classList.remove("hidden");
+        loginBtn.disabled = true;
+        signupBtn.disabled = true;
+        authStatus.textContent = `👋 Logged in as ${user.email}`;
+      } else {
+        blogInterface.classList.add("hidden");
+        logoutBtn.classList.add("hidden");
+        loginBtn.disabled = false;
+        signupBtn.disabled = false;
+        authStatus.textContent = `🔐 Please log in`;
+      }
+    });
+  </script>
+
+  <script>
+    const selectedCategories = new Set();
+    const badges = document.querySelectorAll("#categories-container .category-badge");
+    const selectedContainer = document.getElementById("selected-categories");
+    const hiddenInput = document.getElementById("categories");
+
+    badges.forEach(badge => {
+      badge.addEventListener("click", () => {
+        const cat = badge.textContent.trim();
+        if (selectedCategories.has(cat)) {
+          selectedCategories.delete(cat);
+          badge.classList.remove("selected");
+        } else {
+          selectedCategories.add(cat);
+          badge.classList.add("selected");
+        }
+        updateSelectedCategories();
+      });
+    });
+
+    function updateSelectedCategories() {
+      selectedContainer.innerHTML = "";
+      selectedCategories.forEach(cat => {
+        const span = document.createElement("span");
+        span.className = "category-badge bg-blue-100 text-blue-800";
+        span.textContent = cat;
+        selectedContainer.appendChild(span);
+      });
+      hiddenInput.value = Array.from(selectedCategories).join(",");
+    }
+  </script>
+
+  <script>
+    function getYouTubeThumbnail(url) {
+      try {
+        const videoId = new URL(url).searchParams.get("v");
+        return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      } catch {
+        return null;
+      }
     }
 
-    await db.collection("blogs").add({
-      title,
-      author,
-      content,
-      imageUrl,
-      tags,
-      categories, // <-- Array of category strings
-      date: new Date().toISOString()
-    });
+    document.getElementById("blog-form").addEventListener("submit", async e => {
+      e.preventDefault();
+      const user = firebase.auth().currentUser;
+      if (!user) return alert("Please log in");
 
-    alert("✅ Blog post published successfully!");
-    document.getElementById('blog-form').reset();
-  });
-</script>
+      const title = document.getElementById("title").value.trim();
+      const content = document.getElementById("content").value.trim();
+      const imageUrl = document.getElementById("image").value.trim();
+      const youtube = document.getElementById("youtube").value.trim();
+      const tags = document.getElementById("tags").value.split(',').map(t => t.trim());
+      const categories = document.getElementById("categories").value.split(',').map(c => c.trim());
+      const author = document.getElementById("author").value.trim();
+      const fileInput = document.getElementById("image-file");
 
-
-<script>
-  const selectedCategories = new Set();
-  const selectedContainer = document.getElementById('selected-categories');
-  const hiddenInput = document.getElementById('categories');
-  const categoryBadges = document.querySelectorAll('#categories-container .category-badge');
-
-  function updateHiddenCategories() {
-    hiddenInput.value = Array.from(selectedCategories).join(',');
-    renderSelectedBadges();
-  }
-
-  function renderSelectedBadges() {
-    selectedContainer.innerHTML = '';
-    selectedCategories.forEach(cat => {
-      const span = document.createElement('span');
-      span.className = 'category-badge bg-blue-100 text-blue-800';
-      span.textContent = cat;
-      selectedContainer.appendChild(span);
-    });
-  }
-
-  categoryBadges.forEach(badge => {
-    badge.addEventListener('click', () => {
-      const text = badge.textContent.trim();
-      if (selectedCategories.has(text)) {
-        selectedCategories.delete(text);
-      } else {
-        selectedCategories.add(text);
+      if (!title || !content || !author) {
+        alert("Title, Content, and Author are required.");
+        return;
       }
-      updateHiddenCategories();
+
+      let finalImageUrl = imageUrl;
+      if (!imageUrl && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const imageRef = firebase.storage().ref().child(`blog-images/${Date.now()}_${file.name}`);
+        await imageRef.put(file);
+        finalImageUrl = await imageRef.getDownloadURL();
+      }
+
+      await db.collection("blogs").add({
+        title, content, imageUrl: finalImageUrl, youtube, tags, categories,
+        author, userId: user.uid, userEmail: user.email,
+        date: new Date().toISOString()
+      });
+
+      alert("✅ Post published!");
+      document.getElementById("blog-form").reset();
+      selectedCategories.clear();
+      updateSelectedCategories();
+      document.querySelectorAll(".category-badge.selected").forEach(el => el.classList.remove("selected"));
     });
-  });
+  </script>
+  <script>
+  function getYouTubeThumbnail(url) {
+    try {
+      const videoId = new URL(url).searchParams.get("v");
+      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    } catch {
+      return null;
+    }
+  }
 </script>
-
-
-
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94e87dda837ca764',t:'MTc0OTcyMjMyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
