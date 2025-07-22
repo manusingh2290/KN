@@ -15,17 +15,10 @@
     <div id="post-list" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </main>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBLJkKhR2JC2OVg5ZqLU6o4-MfN_0dSI-I",
-      authDomain: "kumple-blog.firebaseapp.com",
-      projectId: "kumple-blog",
-      storageBucket: "kumple-blog.firebasestorage.app",
-      messagingSenderId: "721982233945",
-      appId: "1:721982233945:web:0d4f5abcc08ea7959f0048",
-      measurementId: "G-KPJRL64WB2"
-    };
 
+  <script src="gitignore.js"></script>
+  <script>
+  
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
     const postList = document.getElementById("post-list");
